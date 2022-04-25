@@ -13,7 +13,7 @@
         <b-button variant="primary" @click="getData">Search</b-button>
       </b-form>
     </div>
-    <div>
+    <div v-if="condition === true">
       <b-card tag="article" style="max-width: 20rem" class="mb-2">
         <h1>{{ query }}</h1>
         <b-card-text>
@@ -41,6 +41,7 @@ export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
   query: any;
   answer = "";
+  condition = false;
 
   async getData() {
     const options = {
@@ -52,11 +53,8 @@ export default class HelloWorld extends Vue {
       "https://pokeapi.co/api/v2/pokemon/" + this.query + "/",
       options
     ).then((res) => res.json());
-    console.log(this.query);
-    console.log(response);
-    console.log(this.answer);
+    this.condition = true;
     this.answer = response;
-    console.log(this.answer);
   }
 }
 </script>
