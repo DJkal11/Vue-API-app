@@ -10,12 +10,25 @@
           v-model="query"
         ></b-form-input>
 
-        <!-- <h1 v-for="item in data" :key="item">
-          {{ item }}
-        </h1> -->
-
         <b-button variant="primary" @click="getData">Search</b-button>
       </b-form>
+    </div>
+    <div>
+      <b-card tag="article" style="max-width: 20rem" class="mb-2">
+        <h1>{{ query }}</h1>
+        <b-card-text>
+          <b>Abilities</b>
+        </b-card-text>
+        <b-card-text>
+          {{ answer.abilities[0].ability.name }}
+        </b-card-text>
+        <b-card-text>
+          <b>Type</b>
+        </b-card-text>
+        <b-card-text>
+          {{ answer.types[0].type.name }}
+        </b-card-text>
+      </b-card>
     </div>
   </div>
 </template>
@@ -26,27 +39,24 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
-  query = "";
+  query: any;
+  answer = "";
 
   async getData() {
     const options = {
-      method: "POST",
+      method: "GET",
       headers: {},
-      body: JSON.stringify({ page: 0, perPage: 15, searchQuery: this.query }),
     };
 
     const response = await fetch(
-      "https://org.bapi.devcurate.co/api/JobBoard/search",
+      "https://pokeapi.co/api/v2/pokemon/" + this.query + "/",
       options
-    );
-    const data = response.json;
-    console.log(data);
-
-    if (data) {
-      return data;
-    } else {
-      return "";
-    }
+    ).then((res) => res.json());
+    console.log(this.query);
+    console.log(response);
+    console.log(this.answer);
+    this.answer = response;
+    console.log(this.answer);
   }
 }
 </script>
