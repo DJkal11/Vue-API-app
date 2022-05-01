@@ -1,11 +1,13 @@
 <template>
   <div class="hello">
-    <div>
+    <div class="input">
       <b-form inline>
-        <label class="sr-only" for="inline-form-input-name">Search Query</label>
+        <label class="sr-only input-label" for="inline-form-input-name"
+          >Search Query</label
+        >
         <b-form-input
           id="inline-form-input-name"
-          class="mb-2 mr-sm-2 mb-sm-0"
+          class="input-text"
           placeholder="Jane Doe"
           v-model="query"
         ></b-form-input>
@@ -13,8 +15,8 @@
         <b-button variant="primary" @click="getData">Search</b-button>
       </b-form>
     </div>
-    <div v-if="condition === true">
-      <b-card tag="article" style="max-width: 20rem" class="mb-2">
+    <div class="response" v-if="condition === true">
+      <b-card tag="article" style="max-width: 20rem" class="mb-2 card">
         <h1>{{ query }}</h1>
         <b-card-text>
           <b>Abilities</b>
@@ -61,18 +63,41 @@ export default class HelloWorld extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.input {
+  margin: auto;
+  margin-top: 10em;
+  background-color: rgb(255, 71, 209);
+  opacity: 0.8;
+  width: 20em;
+  height: 20em;
+  padding-top: 4em;
+  border-radius: 50px;
+  color: white;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.input-text {
+  width: 15em;
+  margin: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.input-label {
+  font-size: 2em;
 }
-a {
-  color: #42b983;
+
+.response {
+  margin: auto;
+  margin-top: 1em;
+  width: 20em;
+  height: 20em;
+  padding-top: 4em;
+  border-radius: 50px;
+}
+
+.card {
+  background-color: rgb(71, 255, 191);
+  opacity: 0.8;
+  border-radius: 50px;
 }
 </style>
